@@ -12,19 +12,37 @@ export default new Vuex.Store({
       { id: 2, msg: "foobar2" },
       { id: 3, msg: "foobar3" }
     ],
-    baseUrl: "https://matrix.org",
-    userId: "",
-    accessToken: ""
+    clientconfig: {
+      baseUrl: "https://matrix.org",
+      userId: "",
+      accessToken: ""
+    }
   },
-  mutations: {},
+  mutations: {
+    clientconfig(state, payload) {
+      state.clientconfig = payload;
+    },
+    clearmessages(state) {
+      state.messages = [];
+    },
+    newmessage(state, payload) {
+      state.messages.push(payload);
+    },
+    updateBaseUrl(state, payload) {
+      state.clientconfig.updateBaseUrl = payload;
+    },
+    updateUserId(state, payload) {
+      state.clientconfig.userId = payload;
+    },
+    updateAccessToken(state, payload) {
+      state.clientconfig.accessToken = payload;
+    }
+  },
   actions: {},
   getters: {
-    room: state => {
-      return state.room;
-    },
-    messages: state => {
-      return state.messages;
-    }
+    messages: state => state.messages,
+    room: state => state.room,
+    clientconfig: state => state.clientconfig
   },
   modules: {},
   plugins: [createPersistedState()]

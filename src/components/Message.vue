@@ -1,6 +1,7 @@
 <template>
   <div class="message">
-    {{ message.msg }}
+    <span class="sender-name">{{ message.sender }}</span>
+    <span class="content-body">{{ message.content.body }}</span>
   </div>
 </template>
 
@@ -13,6 +14,9 @@ export default {
 
 <style scoped lang="scss">
 .message {
-  border: 1px solid blue;
+  border-bottom: 1px solid #eee;
+}
+.message .sender-name::after {
+  content: ": ";
 }
 </style>
