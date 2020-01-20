@@ -1,5 +1,9 @@
 # matrix-viewer
 
+Very WIP!
+
+Simple matrix viewer. Start up with yarn serve, browse to config and insert your userid and token and go back to "home" page.
+
 ## Project setup
 ```
 yarn install
@@ -19,6 +23,3 @@ yarn build
 ```
 yarn lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
