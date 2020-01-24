@@ -11,7 +11,7 @@ Vue.use(VueChatScroll);
 Vue.config.productionTip = false;
 Vue.use(LoadScript);
 
-Vue.loadScript("/lib/matrix.js")
+Vue.loadScript("~lib/matrix.js")
   .then(() => {
     console.log("Matrix sdk js library loaded");
   })
