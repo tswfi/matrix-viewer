@@ -2,17 +2,26 @@
   <div class="room">
     <div class="title">{{ room.title }}</div>
 
-    <message
-      v-for="message in messages"
-      v-bind:message="message"
-      v-bind:key="message.id"
-    ></message>
+    <v-list three-line>
+      <v-list-item v-for="item in messages" :key="item.to">
+        <v-list-item-avatar>
+          <!-- TODO: get the avatar -->
+          <v-img :src="item.avatar">WIP</v-img>
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title v-html="item.sender"></v-list-item-title>
+          <v-list-item-subtitle
+            v-html="item.content.body"
+          ></v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex";
-import Message from "@/components/Message.vue";
 
 export default {
   name: "Room",
@@ -20,10 +29,13 @@ export default {
     ...mapState(["room", "clientconfig"]),
     ...mapGetters(["messages"])
   },
-  components: {
-    Message
+  components: {},
+  updated: function() {
+    // scroll down when ever the element is updated
+    window.scrollTo(0, this.$el.clientHeight);
   },
   mounted: function() {
+    // build the matrix client and start listening on events
     const client = matrixcs.createClient({
       baseUrl: this.clientconfig.baseUrl,
       userId: this.clientconfig.userId,
@@ -35,7 +47,7 @@ export default {
 
     let store = this.$store;
 
-    // start listening on events
+    // start listening on events, TODO: this seems to duplicate events
     client.on("Room.timeline", function(event, room, toStartOfTimeline) {
       if (toStartOfTimeline) {
         return; // don't print paginated results
@@ -52,11 +64,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.title {
-  border: 1px solid red;
-}
-.messages {
-  border: 1px solid green;
-}
-</style>
+<style scoped lang="scss"></style>
