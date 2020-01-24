@@ -29,8 +29,6 @@ export default {
     roomMessages() {
       // try to filter messages to one room
       if (this.$route.params.id) {
-        console.log(this.$route.params.id);
-        console.log(this.$store.messages);
         return this.$store.getters.messages.filter(
           message => message.room_id === this.$route.params.id
         );
