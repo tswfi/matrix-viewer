@@ -66,6 +66,8 @@ export default {
         return; // only print messages
       }
 
+      console.log(event);
+
       // build nicer data model with only some of the data and
       // avatar urls etc ready made
       const data = {
