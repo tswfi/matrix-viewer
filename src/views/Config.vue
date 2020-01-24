@@ -1,12 +1,25 @@
 <template>
   <div class="hello">
     <h2>configure</h2>
-    baseUrl:
-    <input :value="baseUrl" @input="updateBaseUrl" />
-    userid:
-    <input :value="userId" @input="updateUserId" />
-    accesstoken:
-    <input :value="accessToken" @input="updateAccessToken" />
+
+    <v-text-field
+      :value="baseUrl"
+      label="baseUrl"
+      @change="updateBaseUrl"
+      required
+    />
+    <v-text-field
+      :value="userId"
+      label="userId"
+      @change="updateUserId"
+      required
+    />
+    <v-text-field
+      :value="accessToken"
+      label="accessToken"
+      @change="updateAccessToken"
+      required
+    />
   </div>
 </template>
 
@@ -24,14 +37,14 @@ export default {
     ...mapGetters(["clientconfig"])
   },
   methods: {
-    updateBaseUrl(e) {
-      this.$store.commit("updateBaseUrl", e.target.value);
+    updateBaseUrl(val) {
+      this.$store.commit("updateBaseUrl", val);
     },
-    updateUserId(e) {
-      this.$store.commit("updateUserId", e.target.value);
+    updateUserId(val) {
+      this.$store.commit("updateUserId", val);
     },
-    updateAccessToken(e) {
-      this.$store.commit("updateAccessToken", e.target.value);
+    updateAccessToken(val) {
+      this.$store.commit("updateAccessToken", val);
     }
   }
 };
