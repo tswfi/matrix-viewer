@@ -1,14 +1,16 @@
 <template>
   <div class="room">
     <v-list three-line>
-      <v-list-item v-for="item in roomMessages" :key="item.to">
+      <v-list-item v-for="item in roomMessages" :key="item.id">
         <v-list-item-avatar>
           <!-- TODO: get the avatar -->
-          <v-img :src="item.avatar">WIP</v-img>
+          <v-img :src="item.sender_avatar_url"></v-img>
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title v-html="item.sender"></v-list-item-title>
+          <v-list-item-title
+            >{{ item.sender }} ({{ item.date }})</v-list-item-title
+          >
           <v-list-item-subtitle
             v-html="item.content.body"
           ></v-list-item-subtitle>
@@ -63,9 +65,20 @@ export default {
       if (event.getType() !== "m.room.message") {
         return; // only print messages
       }
-      // push the new message to store
-      console.log(event.event);
-      store.commit("newmessage", event.event);
+
+      // build nicer data model with only some of the data and
+      // avatar urls etc ready made
+      const data = {
+        room_id: event.getRoomId(),
+        id: event.getId(),
+        content: event.getContent(),
+        date: event.getDate(),
+        sender: event.sender.name,
+        sender_id: event.sender.userId,
+        sender_avatar_url: event.sender.getAvatarUrl(client.getHomeserverUrl())
+      };
+
+      store.commit("newmessage", data);
     });
     client.startClient();
   }
