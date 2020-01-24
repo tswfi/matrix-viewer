@@ -6,12 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    room: { title: "Title...", id: "" },
-    messages: [
-      { id: 1, msg: "foobar1" },
-      { id: 2, msg: "foobar2" },
-      { id: 3, msg: "foobar3" }
-    ],
+    messages: [],
     clientconfig: {
       baseUrl: "https://matrix.org",
       userId: "",

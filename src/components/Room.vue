@@ -1,9 +1,7 @@
 <template>
   <div class="room">
-    <div class="title">{{ room.title }}</div>
-
     <v-list three-line>
-      <v-list-item v-for="item in messages" :key="item.to">
+      <v-list-item v-for="item in roomMessages" :key="item.to">
         <v-list-item-avatar>
           <!-- TODO: get the avatar -->
           <v-img :src="item.avatar">WIP</v-img>
@@ -26,8 +24,20 @@ import { mapState, mapGetters } from "vuex";
 export default {
   name: "Room",
   computed: {
-    ...mapState(["room", "clientconfig"]),
-    ...mapGetters(["messages"])
+    ...mapState(["clientconfig"]),
+    ...mapGetters(["messages"]),
+    roomMessages() {
+      // try to filter messages to one room
+      if (this.$route.params.id) {
+        console.log(this.$route.params.id);
+        console.log(this.$store.messages);
+        return this.$store.getters.messages.filter(
+          message => message.room_id === this.$route.params.id
+        );
+      } else {
+        return this.$store.getters.messages;
+      }
+    }
   },
   components: {},
   updated: function() {
