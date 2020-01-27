@@ -9,8 +9,14 @@
 
         <v-list-item-content>
           <v-list-item-title
-            >{{ item.sender }} <vue-moments-ago prefix="posted" suffix="ago" :date="item.date" lang="en"></vue-moments-ago></v-list-item-title
-          >
+            >{{ item.sender }}
+            <vue-moments-ago
+              prefix="posted"
+              suffix="ago"
+              :date="item.date"
+              lang="en"
+            ></vue-moments-ago
+          ></v-list-item-title>
           <v-list-item-subtitle
             v-html="item.content.body"
           ></v-list-item-subtitle>
