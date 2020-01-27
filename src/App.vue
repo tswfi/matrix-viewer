@@ -35,7 +35,10 @@
     </v-content>
 
     <v-footer :inset="footer.inset" app>
-      <span class="px-4">&copy; {{ new Date().getFullYear() }}</span>
+      <span class="px-4"
+        >&copy; {{ new Date().getFullYear() }} (built:
+        {{ builtDate | formatDate }} )</span
+      >
     </v-footer>
   </v-app>
 </template>
@@ -47,6 +50,7 @@ export default {
   components: {},
 
   data: () => ({
+    builtDate: document.documentElement.dataset.buildTimestampUtc,
     primaryDrawer: {
       clipped: true,
       mini: true
